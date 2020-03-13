@@ -1,12 +1,9 @@
 <template>
-  <div>illustrapi</div>
+  <div></div>
 </template>
 
 <script>
-export default {
-  components: {}
-  // eslint-disable-next-line semi
-};
+export default {}
 </script>
 
 <style></style>
