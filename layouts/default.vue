@@ -230,14 +230,21 @@ html {
   box-sizing: border-box;
 }
 
-.mono {
-  font-family: 'Roboto-Mono';
-}
-
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+// typorgaphy
+
+.font-mono {
+  font-family: 'Roboto-Mono';
+}
+
+h1,
+h2 {
+  @apply text-4xl text-gray-900 font-black text-center;
 }
 </style>
