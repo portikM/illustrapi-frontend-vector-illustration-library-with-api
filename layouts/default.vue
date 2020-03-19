@@ -32,9 +32,7 @@
               </svg>
             </button>
           </div>
-          <div
-            class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
-          >
+          <div class="flex-1 flex items-center justify-center sm:justify-start">
             <a href="/" class="flex-shrink-0">
               <img
                 class="block sm:hidden h-8 w-auto"
@@ -47,6 +45,7 @@
                 alt="illustrapi logo"
               />
             </a>
+            <ComCtaLabel class="hidden sm:block ml-3">Coming soon</ComCtaLabel>
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex">
@@ -130,7 +129,7 @@
                 </div>
               </ComDropdown>
             </div> -->
-            <ComCta class="mr-2">Sign Up</ComCta>
+            <ComAnchor class="mr-2" href="#sign-up">Sign Up</ComAnchor>
           </div>
         </div>
       </div>
@@ -228,6 +227,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *,
