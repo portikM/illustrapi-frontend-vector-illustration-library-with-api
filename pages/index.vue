@@ -55,7 +55,7 @@
         <ComCta class="whitespace-pre" solid>Keep me posted!</ComCta>
       </div>
     </div>
-    <div class="flex flex-col w-full max-w-4xl mx-auto pb-24">
+    <div class="flex flex-col w-full max-w-4xl mx-auto pb-32">
       <h2 class="pb-16">What's coming?</h2>
       <div class="w-full flex flex-col sm:flex-row sm:flex-wrap">
         <!-- beautiful -->
