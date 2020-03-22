@@ -15,8 +15,12 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "@radial-color-picker/vue-color-picker": "^2.3.0",
+    "lodash": "^4.17.15",
     "nuxt": "^2.0.0",
-    "v-click-outside": "^3.0.1"
+    "v-click-outside": "^3.0.1",
+    "vue-color": "^2.7.1",
+    "vue-multiselect": "^2.1.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

@@ -6,12 +6,14 @@
       :placeholder="placeholder"
       :value="value"
       @keypress.enter="$emit('enter')"
-      @input="$emit('input', $event.target.value)"
+      @input="input"
     />
   </div>
 </template>
 
 <script>
+import * as _ from 'lodash'
+
 export default {
   props: {
     type: {
@@ -26,6 +28,14 @@ export default {
       type: [String, Number],
       default: ''
     }
+  },
+  methods: {
+    input($event) {
+      this.throttledUpdate(this, $event.target.value)
+    },
+    throttledUpdate: _.debounce((vm, value) => {
+      vm.$emit('input', value)
+    }, 500)
   }
 }
 </script>
