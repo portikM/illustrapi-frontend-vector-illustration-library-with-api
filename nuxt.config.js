@@ -32,7 +32,8 @@ export default {
   */
   plugins: [
     '~/plugins/com-components.js',
-    '~/plugins/v-click-outside.js'
+    '~/plugins/click-outside.js',
+    '~/plugins/simple-svg'
   ],
   /*
   ** Nuxt.js dev-modules

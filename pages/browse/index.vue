@@ -20,21 +20,43 @@
         </div>
       </div>
     </div>
+    <div class="w-full flex justify-center flex-wrap pb-16">
+      <div
+        v-for="(illustration, n) in demoIllustrations"
+        :key="n"
+        class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 mx-2 my-6 cursor-pointer"
+        @click="openIllustration(illustration.name)"
+      >
+        <object
+          class="h-24 w-auto mx-auto mb-6 pointer-events-auto"
+          :data="illustration.src"
+          type="image/svg+xml"
+        >
+        </object>
+        {{ illustration.name }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import * as _ from 'lodash'
 
+import BusinessSvg from '~/assets/images/demo-illustrations/business.svg'
+import EducationSvg from '~/assets/images/demo-illustrations/education.svg'
+import FoodSvg from '~/assets/images/demo-illustrations/food.svg'
+import HealthSvg from '~/assets/images/demo-illustrations/health.svg'
+import HobbySvg from '~/assets/images/demo-illustrations/hobby.svg'
+import NatureSvg from '~/assets/images/demo-illustrations/nature.svg'
+import OfficeSvg from '~/assets/images/demo-illustrations/office.svg'
+import ShoppingSvg from '~/assets/images/demo-illustrations/shopping.svg'
+import TechnologySvg from '~/assets/images/demo-illustrations/technology.svg'
+import TravelSvg from '~/assets/images/demo-illustrations/travel.svg'
+
 export default {
   data() {
     return {
       search: {
-        categories: null,
-        query: '',
-        colour: '#38B2AC'
-      },
-      defaultSearch: {
         categories: null,
         query: '',
         colour: '#38B2AC'
@@ -50,6 +72,22 @@ export default {
         'Shopping',
         'Technology',
         'Travel'
+      ],
+      demoIllustrations: [
+        { name: 'Business deal', category: 'Business', src: BusinessSvg },
+        { name: 'Education', category: 'Education', src: EducationSvg },
+        { name: 'Burger', category: 'Food', src: FoodSvg },
+        { name: 'Fitness', category: 'Health', src: HealthSvg },
+        { name: 'Hobby', category: 'Hobby', src: HobbySvg },
+        { name: 'Environment', category: 'Nature', src: NatureSvg },
+        { name: 'Work environment', category: 'Office', src: OfficeSvg },
+        { name: 'Online shopping', category: 'Shopping', src: ShoppingSvg },
+        {
+          name: 'Software development',
+          category: 'Technology',
+          src: TechnologySvg
+        },
+        { name: 'Traveling', category: 'Travel', src: TravelSvg }
       ]
     }
   },
@@ -126,7 +164,10 @@ export default {
       }
 
       console.log('search params: ', routeQuery)
-    }, 500)
+    }, 500),
+    openIllustration(illustration) {
+      console.log(illustration)
+    }
   },
   created() {
     this.handleRouteQuery()
