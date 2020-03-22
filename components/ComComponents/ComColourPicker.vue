@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       open: false,
+      focus: false,
       value: {}
     }
   },

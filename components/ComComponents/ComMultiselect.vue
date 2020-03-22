@@ -86,9 +86,6 @@ export default {
       vm.$emit('input', vm.value)
     }, 500)
   },
-  created() {
-    this.value = this.selected
-  },
   watch: {
     value: {
       handler(val) {
@@ -97,6 +94,9 @@ export default {
         }
       }
     }
+  },
+  created() {
+    this.value = this.selected
   }
 }
 </script>
@@ -104,8 +104,7 @@ export default {
 <style lang="scss">
 .multiselect__input {
   &:focus {
-    outline: none;
-    @apply bg-transparent;
+    @apply outline-none bg-transparent;
   }
 }
 
@@ -116,9 +115,18 @@ export default {
 .multiselect__element .multiselect__option {
   @apply w-full cursor-pointer;
 
+  &::before {
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 400;
+    content: '\f111';
+    @apply text-gray-400;
+  }
+
   &.multiselect__option--selected {
     &::before {
-      content: '\2714';
+      font-family: 'Font Awesome 5 Pro';
+      font-weight: 900;
+      content: '\f058';
       @apply text-teal-500;
     }
   }
