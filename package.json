@@ -35,6 +35,7 @@
   "prettier": {
     "semi": false,
     "singleQuote": true,
-    "space-before-function-paren": true
+    "space-before-function-paren": true,
+    "arrowParens": "always"
   }
 }

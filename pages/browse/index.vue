@@ -1,61 +1,186 @@
 <template>
-  <div class="flex flex-col justify-center max-w-5xl mx-auto px-4 pt-16">
-    <h1 class="pb-4">This is how it's gonna look</h1>
-    <div class="flex justify-between pb-16">
-      <div class="w-full flex flex-wrap sm:flex-no-wrap">
-        <ComMultiselect
-          v-model="search.categories"
-          :selected="search.categories"
-          :options="categories"
-          placeholder="Categories"
-          class="w-full mb-16 sm:w-2/3 sm:mb-0 sm:mr-4 z-50"
-        />
-        <div class="w-full flex justify-between items-center">
-          <ComInput
-            v-model="search.query"
-            class="w-full sm:w-2/3"
-            placeholder="Search"
+  <div class="px-4 pt-16">
+    <div class="flex flex-col justify-center max-w-5xl mx-auto">
+      <h1 class="pb-4">
+        This is how it's gonna look
+      </h1>
+      <div class="flex justify-between pb-16">
+        <div class="w-full flex flex-wrap sm:flex-no-wrap">
+          <ComMultiselect
+            v-model="search.categories"
+            :selected="search.categories"
+            :options="categories"
+            placeholder="Categories"
+            class="w-full mb-16 sm:w-2/3 sm:mb-0 sm:mr-4 z-50"
           />
-          <ComColourPicker v-model="search.colour" class="ml-4 sm:ml-0" />
+          <div class="w-full flex justify-between items-center">
+            <ComInput
+              v-model="search.query"
+              class="w-full sm:w-2/3"
+              placeholder="Search"
+            />
+            <ComColourPicker
+              v-model="search.colour"
+              :colour="searchColour"
+              class="ml-4 sm:ml-0"
+            />
+          </div>
         </div>
       </div>
     </div>
-    <div class="w-full flex justify-center flex-wrap pb-16">
-      <div
-        v-for="(illustration, n) in demoIllustrations"
-        :key="n"
-        class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 mx-2 my-6 cursor-pointer"
-        @click="openIllustration(illustration.name)"
-      >
-        <object
-          class="h-24 w-auto mx-auto mb-6 pointer-events-auto"
-          :data="illustration.src"
-          type="image/svg+xml"
-        >
-        </object>
-        {{ illustration.name }}
-      </div>
+    <div v-if="loading">
+      <div class="h-48"></div>
+      <div class="h-48"></div>
     </div>
+    <section v-else>
+      <div class="flex justify-center max-w-5xl mx-auto pb-16">
+        <div
+          class="w-full flex flex-col justify-center text-center"
+          v-if="!filteredResults.length"
+        >
+          <object
+            class="h-64 w-auto pb-4"
+            :data="searchEmptySvg"
+            type="image/svg+xml"
+          >
+          </object>
+          <p>Sorry, no results</p>
+        </div>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        >
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="
+              filteredResults.some((result) => result.name === 'Business deal')
+            "
+          >
+            <Business class="pb-4 h-32" :colour="searchColour" />
+            <p>Business deal</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="filteredResults.some((result) => result.name === 'Education')"
+          >
+            <Education class="pb-4 h-32" :colour="searchColour" />
+            <p>Education</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="filteredResults.some((result) => result.name === 'Burger')"
+          >
+            <Food class="pb-4 h-32" :colour="searchColour" />
+            <p>Burger</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="filteredResults.some((result) => result.name === 'Fitness')"
+          >
+            <Health class="pb-4 h-32" :colour="searchColour" />
+            <p>Fitness</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="filteredResults.some((result) => result.name === 'Hobby')"
+          >
+            <Hobby class="pb-4 h-32" :colour="searchColour" />
+            <p>Hobby</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="
+              filteredResults.some((result) => result.name === 'Environment')
+            "
+          >
+            <Nature class="pb-4 h-32" :colour="searchColour" />
+            <p>Environment</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="
+              filteredResults.some(
+                (result) => result.name === 'Work environment'
+              )
+            "
+          >
+            <Office class="pb-4 h-32" :colour="searchColour" />
+            <p>Work environment</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="
+              filteredResults.some(
+                (result) => result.name === 'Online shopping'
+              )
+            "
+          >
+            <Shopping class="pb-4 h-32" :colour="searchColour" />
+            <p>Online shopping</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="
+              filteredResults.some(
+                (result) => result.name === 'Software development'
+              )
+            "
+          >
+            <Technology class="pb-4 h-32" :colour="searchColour" />
+            <p>Software development</p>
+          </div>
+
+          <div
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
+            v-if="filteredResults.some((result) => result.name === 'Traveling')"
+          >
+            <Travel class="pb-4 h-32" :colour="searchColour" />
+            <p>Traveling</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 import * as _ from 'lodash'
+import searchEmptySvg from '~/assets/images/search_empty.svg'
 
-import BusinessSvg from '~/assets/images/demo-illustrations/business.svg'
-import EducationSvg from '~/assets/images/demo-illustrations/education.svg'
-import FoodSvg from '~/assets/images/demo-illustrations/food.svg'
-import HealthSvg from '~/assets/images/demo-illustrations/health.svg'
-import HobbySvg from '~/assets/images/demo-illustrations/hobby.svg'
-import NatureSvg from '~/assets/images/demo-illustrations/nature.svg'
-import OfficeSvg from '~/assets/images/demo-illustrations/office.svg'
-import ShoppingSvg from '~/assets/images/demo-illustrations/shopping.svg'
-import TechnologySvg from '~/assets/images/demo-illustrations/technology.svg'
-import TravelSvg from '~/assets/images/demo-illustrations/travel.svg'
+import Business from '~/components/DemoIllustrations/Business.vue'
+import Education from '~/components/DemoIllustrations/Education.vue'
+import Food from '~/components/DemoIllustrations/Food.vue'
+import Health from '~/components/DemoIllustrations/Health.vue'
+import Hobby from '~/components/DemoIllustrations/Hobby.vue'
+import Nature from '~/components/DemoIllustrations/Nature.vue'
+import Office from '~/components/DemoIllustrations/Office.vue'
+import Shopping from '~/components/DemoIllustrations/Shopping.vue'
+import Technology from '~/components/DemoIllustrations/Technology.vue'
+import Travel from '~/components/DemoIllustrations/Travel.vue'
 
 export default {
+  components: {
+    Business,
+    Education,
+    Food,
+    Health,
+    Hobby,
+    Nature,
+    Office,
+    Shopping,
+    Technology,
+    Travel
+  },
   data() {
     return {
+      loading: true,
       search: {
         categories: null,
         query: '',
@@ -74,21 +199,23 @@ export default {
         'Travel'
       ],
       demoIllustrations: [
-        { name: 'Business deal', category: 'Business', src: BusinessSvg },
-        { name: 'Education', category: 'Education', src: EducationSvg },
-        { name: 'Burger', category: 'Food', src: FoodSvg },
-        { name: 'Fitness', category: 'Health', src: HealthSvg },
-        { name: 'Hobby', category: 'Hobby', src: HobbySvg },
-        { name: 'Environment', category: 'Nature', src: NatureSvg },
-        { name: 'Work environment', category: 'Office', src: OfficeSvg },
-        { name: 'Online shopping', category: 'Shopping', src: ShoppingSvg },
+        { name: 'Business deal', category: 'Business' },
+        { name: 'Education', category: 'Education' },
+        { name: 'Burger', category: 'Food' },
+        { name: 'Fitness', category: 'Health' },
+        { name: 'Hobby', category: 'Hobby' },
+        { name: 'Environment', category: 'Nature' },
+        { name: 'Work environment', category: 'Office' },
+        { name: 'Online shopping', category: 'Shopping' },
         {
           name: 'Software development',
-          category: 'Technology',
-          src: TechnologySvg
+          category: 'Technology'
         },
-        { name: 'Traveling', category: 'Travel', src: TravelSvg }
-      ]
+        { name: 'Traveling', category: 'Travel' }
+      ],
+      searchResults: [],
+      searchEmpty: false,
+      searchEmptySvg
     }
   },
   computed: {
@@ -100,6 +227,29 @@ export default {
     },
     searchColour() {
       return this.$route.query.colour || this.search.colour
+    },
+    filteredByCategory() {
+      if (this.searchCategories) {
+        return this.demoIllustrations.filter((illustration) => {
+          if (this.searchCategories.includes(illustration.category)) {
+            return { name: illustration.name, category: illustration.category }
+          }
+        })
+      }
+      return this.demoIllustrations
+    },
+    filteredResults() {
+      if (!this.searchCategories) {
+        return this.searchResults
+      }
+      if (!this.searchQuery && this.searchCategories) {
+        return this.filteredByCategory
+      }
+      return this.searchResults.filter((result) => {
+        if (this.searchCategories.includes(result.category)) {
+          return result
+        }
+      })
     }
   },
   methods: {
@@ -149,7 +299,7 @@ export default {
       this.handleSearch(this)
     },
     // eslint-disable-next-line arrow-parens
-    handleSearch: _.debounce(vm => {
+    handleSearch: _.debounce((vm) => {
       // eslint-disable-next-line prefer-const
       let routeQuery = {}
 
@@ -163,14 +313,28 @@ export default {
         routeQuery.colour = vm.searchColour
       }
 
-      console.log('search params: ', routeQuery)
+      vm.executeSearch(routeQuery)
     }, 500),
-    openIllustration(illustration) {
-      console.log(illustration)
+    executeSearch(searchParams) {
+      this.loading = true
+      // * results per page: &hitsPerPage=number
+      this.$axios
+        .get(
+          `https://${
+            process.env.ALGOLIA_APPLICATION_ID
+          }-dsn.algolia.net/1/indexes/dev_illustrapi?query=${searchParams.query ||
+            ''}&x-algolia-application-id=${
+            process.env.ALGOLIA_APPLICATION_ID
+          }&x-algolia-api-key=${process.env.ALGOLIA_API_KEY}`
+        )
+        .then((response) => {
+          this.loading = false
+          this.$set(this, 'searchResults', response.data.hits)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     }
-  },
-  created() {
-    this.handleRouteQuery()
   },
   watch: {
     search: {
@@ -179,6 +343,9 @@ export default {
         this.executeRouteQuery()
       }
     }
+  },
+  created() {
+    this.handleRouteQuery()
   }
 }
 </script>
