@@ -164,6 +164,9 @@
       </div>
     </nav>
     <main>
+      <no-ssr>
+        <notifications group="notif" />
+      </no-ssr>
       <nuxt />
     </main>
     <footer class="py-16 px-2 sm:px-6 lg:px-8 bg-gray-900">
@@ -392,6 +395,16 @@ html {
   margin: 0;
 }
 
+// extending tailwind
+
+.rounded-2xl {
+  border-radius: 2rem;
+}
+
+.z-1000 {
+  z-index: 1000;
+}
+
 // typorgaphy
 
 .font-mono {
@@ -409,6 +422,30 @@ h3 {
 
 h4 {
   @apply font-bold;
+}
+
+// notifications
+
+.vue-notification {
+  &.info {
+    background: #63b3ed !important;
+    border-left-color: #4299e1 !important;
+  }
+
+  &.warn {
+    background: #f6e05e !important;
+    border-left-color: #ecc94b !important;
+  }
+
+  &.error {
+    background: #fc8181 !important;
+    border-left-color: #f56565 !important;
+  }
+
+  &.success {
+    background-color: #68d391 !important;
+    border-left-color: #48bb78 !important;
+  }
 }
 
 // animations

@@ -33,7 +33,10 @@ export default {
   plugins: [
     '~/plugins/com-components.js',
     '~/plugins/click-outside.js',
-    '~/plugins/modal.js'
+    '~/plugins/modal.js',
+    '~/plugins/tooltip.js',
+    '~/plugins/clipboard.js',
+    { src: '~/plugins/notification.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

@@ -172,10 +172,18 @@
     </section>
     <div v-if="filteredResults.length < 4" class="h-48 hidden sm:block"></div>
 
-    <modal name="illustrationModal" transition="pop-up" :clickToClose="false">
-      <IllustrationModal
+    <modal
+      name="illustrationModal"
+      classes="bg-white rounded-2xl"
+      transition="pop-up"
+      height="auto"
+      adaptive
+      :clickToClose="false"
+    >
+      <IllustrationModalContent
         v-if="viewQuery"
         :id="viewQuery"
+        :colour="searchColour"
         @close="modalCloseHandler"
       />
     </modal>
@@ -185,7 +193,7 @@
 <script>
 import * as _ from 'lodash'
 import searchEmptySvg from '~/assets/images/search_empty.svg'
-import IllustrationModal from '~/components/Modals/IllustrationModal.vue'
+import IllustrationModalContent from '~/components/Modals/IllustrationModalContent.vue'
 
 import Business from '~/components/DemoIllustrations/Business.vue'
 import Education from '~/components/DemoIllustrations/Education.vue'
@@ -200,7 +208,7 @@ import Travel from '~/components/DemoIllustrations/Travel.vue'
 
 export default {
   components: {
-    IllustrationModal,
+    IllustrationModalContent,
     Business,
     Education,
     Food,
