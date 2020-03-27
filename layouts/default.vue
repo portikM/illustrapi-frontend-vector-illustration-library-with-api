@@ -410,4 +410,16 @@ h3 {
 h4 {
   @apply font-bold;
 }
+
+// animations
+
+.pop-up-enter-active,
+.pop-up-leave-active {
+  transition: all 0.5s;
+}
+.pop-up-enter,
+.pop-up-leave-active {
+  opacity: 0;
+  transform: translateY(25px);
+}
 </style>

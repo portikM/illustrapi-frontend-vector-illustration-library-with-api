@@ -32,7 +32,8 @@ export default {
   */
   plugins: [
     '~/plugins/com-components.js',
-    '~/plugins/click-outside.js'
+    '~/plugins/click-outside.js',
+    '~/plugins/modal.js'
   ],
   /*
   ** Nuxt.js dev-modules

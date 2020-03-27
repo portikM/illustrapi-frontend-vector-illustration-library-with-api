@@ -66,6 +66,7 @@
             v-if="
               filteredResults.some((result) => result.name === 'Business deal')
             "
+            @click="viewIllustration('business-deal')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Business class="pb-4 h-32" :colour="searchColour" />
@@ -74,6 +75,7 @@
 
           <div
             v-if="filteredResults.some((result) => result.name === 'Education')"
+            @click="viewIllustration('education')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Education class="pb-4 h-32" :colour="searchColour" />
@@ -82,6 +84,7 @@
 
           <div
             v-if="filteredResults.some((result) => result.name === 'Burger')"
+            @click="viewIllustration('burger')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Food class="pb-4 h-32" :colour="searchColour" />
@@ -90,6 +93,7 @@
 
           <div
             v-if="filteredResults.some((result) => result.name === 'Fitness')"
+            @click="viewIllustration('fitness')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Health class="pb-4 h-32" :colour="searchColour" />
@@ -98,6 +102,7 @@
 
           <div
             v-if="filteredResults.some((result) => result.name === 'Hobby')"
+            @click="viewIllustration('hobby')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Hobby class="pb-4 h-32" :colour="searchColour" />
@@ -108,6 +113,7 @@
             v-if="
               filteredResults.some((result) => result.name === 'Environment')
             "
+            @click="viewIllustration('environment')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Nature class="pb-4 h-32" :colour="searchColour" />
@@ -120,6 +126,7 @@
                 (result) => result.name === 'Work environment'
               )
             "
+            @click="viewIllustration('work-environment')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Office class="pb-4 h-32" :colour="searchColour" />
@@ -132,6 +139,7 @@
                 (result) => result.name === 'Online shopping'
               )
             "
+            @click="viewIllustration('online-shopping')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Shopping class="pb-4 h-32" :colour="searchColour" />
@@ -144,6 +152,7 @@
                 (result) => result.name === 'Software development'
               )
             "
+            @click="viewIllustration('software-development')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Technology class="pb-4 h-32" :colour="searchColour" />
@@ -152,6 +161,7 @@
 
           <div
             v-if="filteredResults.some((result) => result.name === 'Traveling')"
+            @click="viewIllustration('traveling')"
             class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Travel class="pb-4 h-32" :colour="searchColour" />
@@ -161,12 +171,21 @@
       </div>
     </section>
     <div v-if="filteredResults.length < 4" class="h-48 hidden sm:block"></div>
+
+    <modal name="illustrationModal" transition="pop-up" :clickToClose="false">
+      <IllustrationModal
+        v-if="viewQuery"
+        :id="viewQuery"
+        @close="modalCloseHandler"
+      />
+    </modal>
   </div>
 </template>
 
 <script>
 import * as _ from 'lodash'
 import searchEmptySvg from '~/assets/images/search_empty.svg'
+import IllustrationModal from '~/components/Modals/IllustrationModal.vue'
 
 import Business from '~/components/DemoIllustrations/Business.vue'
 import Education from '~/components/DemoIllustrations/Education.vue'
@@ -181,6 +200,7 @@ import Travel from '~/components/DemoIllustrations/Travel.vue'
 
 export default {
   components: {
+    IllustrationModal,
     Business,
     Education,
     Food,
@@ -228,7 +248,6 @@ export default {
         { name: 'Traveling', category: 'Travel' }
       ],
       searchResults: [],
-      searchEmpty: false,
       searchEmptySvg
     }
   },
@@ -264,6 +283,9 @@ export default {
           return result
         }
       })
+    },
+    viewQuery() {
+      return this.$route.query.view
     }
   },
   methods: {
@@ -313,9 +335,12 @@ export default {
       if (this.search.colour) {
         routeQuery.colour = this.search.colour
       }
+      if (this.viewQuery) {
+        routeQuery.view = this.viewQuery
+      }
 
       this.$router.push({
-        path: 'browse',
+        route: 'browse',
         query: routeQuery
       })
 
@@ -339,6 +364,10 @@ export default {
       vm.executeSearch(routeQuery)
     }, 500),
     executeSearch(searchParams) {
+      if (this.viewQuery) {
+        this.$modal.show('illustrationModal')
+      }
+
       this.loading = true
       // * results per page: &hitsPerPage=number
       this.$axios
@@ -355,8 +384,57 @@ export default {
           this.$set(this, 'searchResults', response.data.hits)
         })
         .catch((e) => {
-          console.log(e)
+          console.error(e)
         })
+    },
+    viewIllustration(id) {
+      // eslint-disable-next-line prefer-const
+      let routeQuery = {}
+
+      if (
+        Array.isArray(this.search.categories) &&
+        this.search.categories.length
+      ) {
+        routeQuery.categories = this.search.categories
+      }
+      if (this.search.query) {
+        routeQuery.query = this.search.query
+      }
+      if (this.search.colour) {
+        routeQuery.colour = this.search.colour
+      }
+      routeQuery.view = id
+
+      this.$router.push({
+        route: 'browse',
+        query: routeQuery
+      })
+
+      this.$modal.show('illustrationModal')
+    },
+    modalCloseHandler() {
+      this.$modal.hide('illustrationModal')
+
+      // eslint-disable-next-line prefer-const
+      let routeQuery = {}
+
+      if (
+        Array.isArray(this.search.categories) &&
+        this.search.categories.length
+      ) {
+        routeQuery.categories = this.search.categories
+      }
+      if (this.search.query) {
+        routeQuery.query = this.search.query
+      }
+      if (this.search.colour) {
+        routeQuery.colour = this.search.colour
+      }
+
+      this.$router.push({
+        route: 'browse',
+        query: routeQuery
+      })
     }
   },
   watch: {
@@ -364,6 +442,14 @@ export default {
       deep: true,
       handler(val) {
         this.executeRouteQuery()
+      }
+    },
+    viewQuery: {
+      immediate: true,
+      handler(val) {
+        if (val) {
+          this.$modal.show('illustrationModal')
+        }
       }
     }
   },
