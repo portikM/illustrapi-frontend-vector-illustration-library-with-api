@@ -18,7 +18,20 @@
               v-model="search.query"
               class="w-full sm:w-2/3"
               placeholder="Search"
-            />
+            >
+              <!-- prettier-ignore -->
+              <svg
+                slot="icon"
+                width="19"
+                height="19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="stroke-current origin-center"
+              >
+                <path clip-rule="evenodd" d="M8 15c3.866 0 7-3.134 7-7 0-3.86599-3.134-7-7-7-3.86599 0-7 3.13401-7 7 0 3.866 3.13401 7 7 7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M18 18l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </ComInput>
             <ComColourPicker
               v-model="search.colour"
               :colour="searchColour"
@@ -35,8 +48,8 @@
     <section v-else>
       <div class="flex justify-center max-w-5xl mx-auto pb-16">
         <div
-          class="w-full flex flex-col justify-center text-center"
           v-if="!filteredResults.length"
+          class="w-full flex flex-col justify-center text-center"
         >
           <object
             class="h-64 w-auto pb-4"
@@ -50,96 +63,96 @@
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
         >
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="
               filteredResults.some((result) => result.name === 'Business deal')
             "
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Business class="pb-4 h-32" :colour="searchColour" />
             <p>Business deal</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="filteredResults.some((result) => result.name === 'Education')"
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Education class="pb-4 h-32" :colour="searchColour" />
             <p>Education</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="filteredResults.some((result) => result.name === 'Burger')"
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Food class="pb-4 h-32" :colour="searchColour" />
             <p>Burger</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="filteredResults.some((result) => result.name === 'Fitness')"
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Health class="pb-4 h-32" :colour="searchColour" />
             <p>Fitness</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="filteredResults.some((result) => result.name === 'Hobby')"
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Hobby class="pb-4 h-32" :colour="searchColour" />
             <p>Hobby</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="
               filteredResults.some((result) => result.name === 'Environment')
             "
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Nature class="pb-4 h-32" :colour="searchColour" />
             <p>Environment</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="
               filteredResults.some(
                 (result) => result.name === 'Work environment'
               )
             "
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Office class="pb-4 h-32" :colour="searchColour" />
             <p>Work environment</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="
               filteredResults.some(
                 (result) => result.name === 'Online shopping'
               )
             "
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Shopping class="pb-4 h-32" :colour="searchColour" />
             <p>Online shopping</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="
               filteredResults.some(
                 (result) => result.name === 'Software development'
               )
             "
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Technology class="pb-4 h-32" :colour="searchColour" />
             <p>Software development</p>
           </div>
 
           <div
-            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
             v-if="filteredResults.some((result) => result.name === 'Traveling')"
+            class="w-56 text-center rounded-lg hover:shadow-2xl px-4 py-6 cursor-pointer"
           >
             <Travel class="pb-4 h-32" :colour="searchColour" />
             <p>Traveling</p>
@@ -147,6 +160,7 @@
         </div>
       </div>
     </section>
+    <div v-if="filteredResults.length < 4" class="h-48 hidden sm:block"></div>
   </div>
 </template>
 
@@ -255,20 +269,29 @@ export default {
   methods: {
     handleRouteQuery() {
       const curentRouteQuery = {
-        categories: this.searchCategories,
+        categories:
+          typeof this.searchCategories === 'string'
+            ? [this.searchCategories]
+            : this.searchCategories,
         query: this.searchQuery,
         colour: this.searchColour
       }
 
       if (curentRouteQuery !== this.search) {
         if (this.searchCategories) {
-          this.search.categories = this.searchCategories
+          this.$set(
+            this.search,
+            'categories',
+            typeof this.searchCategories === 'string'
+              ? [this.searchCategories]
+              : this.searchCategories
+          )
         }
         if (this.searchQuery) {
-          this.search.query = this.searchQuery
+          this.$set(this.search, 'query', this.searchQuery)
         }
         if (this.searchColour) {
-          this.search.colour = this.searchColour
+          this.$set(this.search, 'colour', this.searchColour)
         }
       }
 

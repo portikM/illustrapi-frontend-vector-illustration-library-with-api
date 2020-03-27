@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     // eslint-disable-next-line arrow-parens
-    throttledUpdate: _.debounce(vm => {
+    throttledUpdate: _.debounce((vm) => {
       vm.$emit('input', vm.value)
     }, 500)
   },
