@@ -36,7 +36,8 @@ export default {
     '~/plugins/modal.js',
     '~/plugins/tooltip.js',
     '~/plugins/clipboard.js',
-    { src: '~/plugins/notification.js', ssr: false }
+    { src: '~/plugins/notification.js', ssr: false },
+    { src: '~plugins/ga.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -45,7 +46,10 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-162119048-1'
+    }]
   ],
   /*
   ** Nuxt.js modules

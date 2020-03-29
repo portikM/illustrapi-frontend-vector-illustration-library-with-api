@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col justify-center max-w-5xl mx-auto px-4 pt-16">
     <section class="max-w-3xl mx-auto text-lg pb-16">
-      <h1 class="pb-10">
-        Thde idea
-      </h1>
-      <div class="pb-10">
+      <div class="pb-16">
+        <h1 class="pb-10">
+          Thde idea
+        </h1>
         <p>
           We came up with the idea to create an illustration library with an API
           after we couldn’t find one we could to use for our project. While there
@@ -37,7 +37,6 @@
           <li>Simplicity conveys sophistication</li>
           <li>Detalization communicates thofullness</li>
         </ul>
-
         <br />
         <p>
           Another big aspect we kept in mind while creating illustrapi is open source community.
@@ -46,7 +45,7 @@
             source non-commercial projects.</span>
         </p>
       </div>
-      <div class="pb-10">
+      <div class="pb-16">
         <h1 class="pb-10">
           Team
         </h1>
@@ -165,7 +164,7 @@
           </div>
         </div>
       </div>
-      <div class="pb-10">
+      <div class="pb-16">
         <h1 class="pb-10">
           FAQs
         </h1>
@@ -175,7 +174,8 @@
               When is it gonna be available?
             </h3>
             <p>
-              We don’t have any timeframes yet. Right now we are in very early development stages and drawing illustrations. You can <router-link class="border-b hover:text-gray-400" :to="{ path: '/#sign-up' }" target="_blank">sign up</router-link> for project updates, early previews and to find out when it’s ready.
+              We don’t have any timeframes yet. Right now we are in very early development stages and drawing illustrations. You can <router-link class="border-b hover:text-gray-400" :to="{ path: '/#sign-up' }" target="_blank">
+                sign up</router-link> for project updates, early previews and to find out when it’s ready.
             </p>
           </div>
           <div>
@@ -200,7 +200,8 @@
               I want to use it ASAP
             </h3>
             <p>
-              You can help us by telling us about your project so we could address your needs. Please <router-link class="border-b hover:text-gray-400" :to="{ path: '/#sign-up' }" target="_blank">sign up</router-link> for our newsletter and we will contact you to hear more.
+              You can help us by telling us about your project so we could address your needs. Please <router-link class="border-b hover:text-gray-400" :to="{ path: '/#sign-up' }" target="_blank">
+                sign up</router-link> for our newsletter and we will contact you to hear more.
             </p>
           </div>
           <div>
