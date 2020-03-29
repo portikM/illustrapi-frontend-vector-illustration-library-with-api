@@ -1,7 +1,11 @@
 <template>
   <div class="flex flex-col justify-center max-w-5xl mx-auto px-4 pt-16">
-    <ComCtaLabel class="sm:hidden mx-auto mb-2">Coming soon</ComCtaLabel>
-    <h1 class="pb-4">Beautiful vector illustration library with API</h1>
+    <ComCtaLabel class="sm:hidden mx-auto mb-2">
+      Coming soon
+    </ComCtaLabel>
+    <h1 class="pb-4">
+      Beautiful vector illustration library with API
+    </h1>
     <p class="text-center pb-16">
       Simple and delightful design solution that will make your next project
       look awesome.
@@ -51,12 +55,22 @@
         ready.
       </p>
       <div class="flex max-w-xl mx-auto">
-        <ComInput class="w-full mr-3" type="email" placeholder="Your email" />
-        <ComCta class="whitespace-pre" solid>Keep me posted!</ComCta>
+        <ComInput
+          v-model="subscriberEmail"
+          class="w-full mr-3"
+          type="email"
+          placeholder="Your email"
+          @enter="subscribe"
+        />
+        <ComCta class="whitespace-no-wrap" solid @click="subscribe">
+          Keep me posted!
+        </ComCta>
       </div>
     </div>
     <div class="flex flex-col w-full max-w-4xl mx-auto pb-32">
-      <h2 class="pb-16">What's coming?</h2>
+      <h2 class="pb-16">
+        What's coming?
+      </h2>
       <div class="w-full flex flex-col sm:flex-row sm:flex-wrap">
         <!-- beautiful -->
         <div
@@ -64,11 +78,13 @@
         >
           <!-- prettier-ignore -->
           <svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-current text-gray-900 mb-4 mx-auto md:mx-0">
-            <path d="M18 28.5L28.5 18l4.5 4.5L22.5 33 18 28.5z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M27 19.5L24.75 8.25 3 3l5.25 21.75L19.5 27l7.5-7.5zM3 3l11.379 11.379" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16.5 19.5c1.6569 0 3-1.3431 3-3s-1.3431-3-3-3-3 1.3431-3 3 1.3431 3 3 3z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 28.5L28.5 18l4.5 4.5L22.5 33 18 28.5z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M27 19.5L24.75 8.25 3 3l5.25 21.75L19.5 27l7.5-7.5zM3 3l11.379 11.379" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M16.5 19.5c1.6569 0 3-1.3431 3-3s-1.3431-3-3-3-3 1.3431-3 3 1.3431 3 3 3z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <h3 class="pb-4">Beautiful illustrations</h3>
+          <h3 class="pb-4">
+            Beautiful illustrations
+          </h3>
           <p class="w-56 mx-auto md:mx-0">
             Nice, clean and crisp vector illustrations.
           </p>
@@ -88,7 +104,9 @@
               stroke-linejoin="round"
             />
           </svg>
-          <h3 class="pb-4">Wide selection</h3>
+          <h3 class="pb-4">
+            Wide selection
+          </h3>
           <p class="w-56 mx-auto md:mx-0">
             More than one hundred of different illustrations.
           </p>
@@ -100,9 +118,11 @@
         >
           <!-- prettier-ignore -->
           <svg width="48" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-current text-gray-900 mb-4 mx-auto md:mx-0">
-            <path d="M32.6667 28l13-13-13-13M15.3333 2L2.33334 15 15.3333 28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M32.6667 28l13-13-13-13M15.3333 2L2.33334 15 15.3333 28" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <h3 class="pb-4">Simple API</h3>
+          <h3 class="pb-4">
+            Simple API
+          </h3>
           <p class="w-64 mx-auto md:mx-0">
             Intuitive and well ducumented API ednpoints.
           </p>
@@ -114,9 +134,11 @@
         >
           <!-- prettier-ignore -->
           <svg width="39" height="39" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-current text-gray-900 mb-4 mx-auto md:mx-0">
-            <path d="M17.875 30.875c7.1797 0 13-5.8203 13-13s-5.8203-13-13-13-13 5.8203-13 13 5.8203 13 13 13zM34.125 34.1249l-7.0688-7.0687" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17.875 30.875c7.1797 0 13-5.8203 13-13s-5.8203-13-13-13-13 5.8203-13 13 5.8203 13 13 13zM34.125 34.1249l-7.0688-7.0687" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <h3 class="pb-4">Searchable</h3>
+          <h3 class="pb-4">
+            Searchable
+          </h3>
           <p class="w-56 mx-auto md:mx-0">
             Search by collection, category and/or keywords.
           </p>
@@ -135,7 +157,9 @@
               stroke-linejoin="round"
             />
           </svg>
-          <h3 class="pb-4">Highly customizable</h3>
+          <h3 class="pb-4">
+            Highly customizable
+          </h3>
           <p class="w-56 mx-auto md:mx-0">
             Customize colour to fit your brand style.
           </p>
@@ -154,20 +178,85 @@
               stroke-linejoin="round"
             />
           </svg>
-          <h3 class="pb-4">Easily adoptable</h3>
+          <h3 class="pb-4">
+            Easily adoptable
+          </h3>
           <p class="w-56 mx-auto md:mx-0">
             Neutral and clean style will play well with any UI.
           </p>
         </div>
       </div>
     </div>
+    <ThankYouModal thank-you-message="Thank you for subscribing!" />
   </div>
 </template>
 
 <script>
 import productDemoSvg from '~/assets/images/product_demo.svg'
+import ThankYouModal from '~/components/Modals/ThankYouModal.vue'
 
 export default {
+  components: {
+    ThankYouModal
+  },
+  data() {
+    return {
+      productDemoSvg,
+      subscriberEmail: ''
+    }
+  },
+  methods: {
+    validEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(email)
+    },
+    subscribe() {
+      if (this.subscriberEmail && this.validEmail(this.subscriberEmail)) {
+        const data = {
+          contacts: [
+            {
+              email: this.subscriberEmail
+            }
+          ]
+        }
+        this.$axios
+          .put('https://api.sendgrid.com/v3/marketing/contacts', data, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
+            }
+          })
+          .then((response) => {
+            if (response.status === 202) {
+              this.subscriberEmail = ''
+              this.$modal.show('thankYouModal')
+            } else {
+              this.$notify({
+                group: 'notif',
+                type: 'error',
+                text:
+                  'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com'
+              })
+            }
+          })
+          .catch((e) => {
+            console.error(e)
+            this.$notify({
+              group: 'notif',
+              type: 'error',
+              text:
+                'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com'
+            })
+          })
+      } else {
+        this.$notify({
+          group: 'notif',
+          type: 'error',
+          text: 'Email not valid'
+        })
+      }
+    }
+  },
   head() {
     return {
       title: 'illustrapi - vector illustration library',
@@ -183,11 +272,6 @@ export default {
           content: 'illustrapi, vector, illustration, library, API, svg'
         }
       ]
-    }
-  },
-  data() {
-    return {
-      productDemoSvg
     }
   }
 }

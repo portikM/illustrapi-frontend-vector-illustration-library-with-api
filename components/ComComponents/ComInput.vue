@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import * as _ from 'lodash'
-
 export default {
   props: {
     icon: {
@@ -51,11 +49,8 @@ export default {
   },
   methods: {
     input($event) {
-      this.throttledUpdate(this, $event.target.value)
-    },
-    throttledUpdate: _.debounce((vm, value) => {
-      vm.$emit('input', value)
-    }, 500)
+      this.$emit('input', $event.target.value)
+    }
   }
 }
 </script>
