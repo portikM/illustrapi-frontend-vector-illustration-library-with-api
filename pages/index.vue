@@ -197,12 +197,12 @@ import ThankYouModal from '~/components/Modals/ThankYouModal.vue'
 
 export default {
   components: {
-    ThankYouModal
+    ThankYouModal,
   },
   data() {
     return {
       productDemoSvg,
-      subscriberEmail: ''
+      subscriberEmail: '',
     }
   },
   methods: {
@@ -215,16 +215,16 @@ export default {
         const data = {
           contacts: [
             {
-              email: this.subscriberEmail
-            }
-          ]
+              email: this.subscriberEmail,
+            },
+          ],
         }
         this.$axios
           .put('https://api.sendgrid.com/v3/marketing/contacts', data, {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
-            }
+              Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
+            },
           })
           .then((response) => {
             if (response.status === 202) {
@@ -235,7 +235,7 @@ export default {
                 group: 'notif',
                 type: 'error',
                 text:
-                  'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com'
+                  'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com',
               })
             }
           })
@@ -245,17 +245,17 @@ export default {
               group: 'notif',
               type: 'error',
               text:
-                'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com'
+                'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com',
             })
           })
       } else {
         this.$notify({
           group: 'notif',
           type: 'error',
-          text: 'Email not valid'
+          text: 'Email not valid',
         })
       }
-    }
+    },
   },
   head() {
     return {
@@ -264,16 +264,16 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Beautiful vector illustration library with API.'
+          content: 'Beautiful vector illustration library with API.',
         },
         {
           hid: 'keywords',
           name: 'keywords',
-          content: 'illustrapi, vector, illustration, library, API, svg'
-        }
-      ]
+          content: 'illustrapi, vector, illustration, library, API, svg',
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

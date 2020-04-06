@@ -20,6 +20,7 @@ module.exports = {
         "normal": "never",
         "component": "any"
       }
-    }]
+    }],
+    "comma-dangle": [2, "ignore"]
   }
 }
