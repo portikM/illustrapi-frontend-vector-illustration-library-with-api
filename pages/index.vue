@@ -42,22 +42,25 @@
               class="pb-4 w-10/12 mx-auto"
               :data="productDemoSvg"
               type="image/svg+xml"
-            ></object>
+              >Digital Product</object
+            >
             <h3>Lorem ipsum</h3>
             <p>Lorem ipsum dolor sit amet.</p>
           </div>
         </header>
       </div>
     </section>
-    <div id="sign-up" class="pt-64 pb-32">
-      <p class="text-center pt-10 pb-6">
+    <div id="sign-up" class="pt-64 pb-32 flex flex-col items-center">
+      <label for="newsletter-sign-up" class="text-center pt-10 pb-6">
         Sign up for project updates, early previews, and to find out when it’s
         ready.
-      </p>
-      <div class="flex max-w-xl mx-auto">
+      </label>
+      <div class="w-full flex max-w-xl mx-auto">
         <ComInput
           v-model="subscriberEmail"
           class="w-full mr-3"
+          id="newsletter-sign-up"
+          name="newsletter-sign-up"
           type="email"
           placeholder="Your email"
           @enter="subscribe"
@@ -197,12 +200,12 @@ import ThankYouModal from '~/components/Modals/ThankYouModal.vue'
 
 export default {
   components: {
-    ThankYouModal,
+    ThankYouModal
   },
   data() {
     return {
       productDemoSvg,
-      subscriberEmail: '',
+      subscriberEmail: ''
     }
   },
   methods: {
@@ -215,27 +218,28 @@ export default {
         const data = {
           contacts: [
             {
-              email: this.subscriberEmail,
-            },
-          ],
+              email: this.subscriberEmail
+            }
+          ]
         }
         this.$axios
           .put('https://api.sendgrid.com/v3/marketing/contacts', data, {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
-            },
+              Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`
+            }
           })
           .then((response) => {
             if (response.status === 202) {
               this.subscriberEmail = ''
+              this.$ga.event('Newsletter', 'click')
               this.$modal.show('thankYouModal')
             } else {
               this.$notify({
                 group: 'notif',
                 type: 'error',
                 text:
-                  'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com',
+                  'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com'
               })
             }
           })
@@ -245,17 +249,17 @@ export default {
               group: 'notif',
               type: 'error',
               text:
-                'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com',
+                'Sorry, an error occurred.<br>Please let as know at help@illustrapi.com'
             })
           })
       } else {
         this.$notify({
           group: 'notif',
           type: 'error',
-          text: 'Email not valid',
+          text: 'Email not valid'
         })
       }
-    },
+    }
   },
   head() {
     return {
@@ -264,16 +268,16 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Beautiful vector illustration library with API.',
+          content: 'Beautiful vector illustration library with API.'
         },
         {
           hid: 'keywords',
           name: 'keywords',
-          content: 'illustrapi, vector, illustration, library, API, svg',
-        },
-      ],
+          content: 'illustrapi, vector, illustration, library, API, svg'
+        }
+      ]
     }
-  },
+  }
 }
 </script>
 

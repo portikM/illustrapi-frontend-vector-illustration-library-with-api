@@ -195,6 +195,7 @@
             class="block text-white font-bold hover:text-gray-300 mb-2"
             href="mailto:hello@illustrapi.com"
             target="_blank"
+            @click="$ga.event('Contact', 'click')"
           >
             <span class="hidden lg:block">hello@illustrapi.com</span>
             <span class="lg:hidden">Contact</span>
@@ -247,7 +248,12 @@
           class="w-full sm:w-1/6 flex justify-center sm:justify-end pb-10 sm:pb-0 items-baseline"
         >
           <!-- twitter -->
-          <a class="block text-white hover:text-gray-300 p-1 mr-1" href="#">
+          <a
+            class="block text-white hover:text-gray-300 p-1 mr-1"
+            href="#"
+            aria-label="twitter"
+            @click="$ga.event('Social Media', 'click', 'twitter')"
+          >
             <!-- prettier-ignore -->
             <svg width="16" height="13" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-current">
               <path
@@ -257,7 +263,12 @@
           </a>
 
           <!-- medium -->
-          <a class="block text-white hover:text-gray-300 p-1 mr-1" href="#">
+          <a
+            class="block text-white hover:text-gray-300 p-1 mr-1"
+            href="#"
+            aria-label="medium"
+            @click="$ga.event('Social Media', 'click', 'medium')"
+          >
             <!-- prettier-ignore -->
             <svg width="13" height="13" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-current">
               <path
@@ -267,7 +278,7 @@
           </a>
 
           <!-- dribbble -->
-          <!-- <a class="block text-white hover:text-gray-300 p-1 mr-1" href="#"> -->
+          <!-- <a class="block text-white hover:text-gray-300 p-1 mr-1" href="#" aria-label="dribbble" @click="$ga.event('Social Media', 'click', 'dribbble')"> -->
           <!-- prettier-ignore -->
           <!-- <svg
               width="13"
@@ -284,7 +295,12 @@
           </a> -->
 
           <!-- product hunt -->
-          <a class="block text-white hover:text-gray-300 p-1 mr-1" href="#">
+          <a
+            class="block text-white hover:text-gray-300 p-1 mr-1"
+            href="#"
+            aria-label="product_hunt"
+            @click="$ga.event('Social Media', 'click', 'product_hunt')"
+          >
             <!-- prettier-ignore -->
             <svg
               width="14"

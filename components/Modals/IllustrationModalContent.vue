@@ -229,6 +229,7 @@ export default {
       this.$emit('close')
     },
     onCopy() {
+      this.$ga.event('Share Illustration', 'copy', this.id)
       this.$notify({
         group: 'notif',
         type: 'success',

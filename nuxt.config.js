@@ -36,8 +36,7 @@ export default {
     '~/plugins/modal.js',
     '~/plugins/tooltip.js',
     '~/plugins/clipboard.js',
-    { src: '~/plugins/notification.js', ssr: false },
-    { src: '~plugins/ga.js', ssr: false }
+    { src: '~/plugins/notification.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
