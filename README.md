@@ -1,6 +1,6 @@
 # illustrapi
 
-> Beautiful vector illustration library with API
+> Beautiful vector illustration library with API (project frozen indefinitely)
 
 ## Build Setup
 
