@@ -17,7 +17,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@radial-color-picker/vue-color-picker": "^2.3.0",
     "lodash": "^4.17.15",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.16.3",
     "v-click-outside": "^3.0.1",
     "v-tooltip": "^2.0.3",
     "vue-clipboard2": "^0.3.1",
